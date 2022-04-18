@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,9 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chat',
+    'chat.apps.ChatConfig',
     'channels',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -143,3 +143,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+LOGOUT_REDIRECT_URL = '/chat/'
+LOGIN_REDIRECT_URL = '/chat/'
+LOGIN_URL = '/login/'

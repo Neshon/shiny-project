@@ -2,14 +2,16 @@ import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
+from django.contrib.auth.models import User
 
-from .models import Message
+from .models import Message, Room
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_group_name = 'chat_%s' % self.room_name
+        self.room_group_name = f'chat_{self.room_name}'
+        # self.room_group_name = f'chat_%s' % self.room_name
 
         # Join room
         await self.channel_layer.group_add(
@@ -58,4 +60,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def save_message(self, username, room, message):
-        Message.objects.create(username=username, room=room, content=message)
+        user = User.objects.get(username=username)
+        room = Room.objects.get(name=room)
+
+        Message.objects.create(user=user, room=room, content=message)

@@ -1,62 +1,94 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Chatty</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    </head>
+{% block title %}Rooms | {% endblock %}
 
-    <body>
-        <section class="section">
-            <div class="container">
-                <div class="columns is-multiline">
-                    <div class="column is-6 is-offset-3 mb-6">
-                        <section class="hero is-link">
-                            <div class="hero-body">
-                                <p class="title is-1">
-                                    Chat
-                                </p>
-                            </div>
-                        </section>
-                    </div>
+{% block content %}
+<div class="hero">
+    <div class="hero-body">
+        <h1 class="title has-text-centered has-text-white">Rooms</h1>
+    </div>
+</div>
 
-                    <div class="column is-4 is-offset-4">
-                        <div class="field">
-                            <label>Room name</label>
+<section class="section has-text-white">
+    <div class="columns is-multiline">
+        {% for room in rooms %}
+        <div class="column is-4 has-text-centered">
+            <div class="box">
+                <h2 class="subtitle">{{ room.name }}</h2>
 
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Room name" id="room-name-input">
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label>Username</label>
-
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Username" id="username-input">
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <div class="control">
-                                <a class="button is-dark" id="room-name-submit">Submit</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a href="{% url 'room' room.id %}" class="button">Join</a>
             </div>
-        </section>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
 
-        <script>
-            document.querySelector('#room-name-input').focus();
 
-            document.querySelector('#room-name-submit').onclick = function(e) {
-                var roomName = document.querySelector('#room-name-input').value;
-                var userName = document.querySelector('#username-input').value;
 
-                window.location.replace(roomName + '/?username=' + userName);
-            };
-        </script>
-    </body>
-</html>
+
+
+
+
+{#{% extends 'base.html' %}#}
+{#{% block title %}Welcome | {% endblock %}#}
+{#{% block content %}#}
+{#    <div class="hero">#}
+{#        <div class="hero-body">#}
+{#            <h1 class="title has-text-centered has-text-white">Djangochat</h1>#}
+{#        </div>#}
+{#    </div>#}
+{#    <section class="section">#}
+{#            <div class="container">#}
+{#                <div class="columns is-multiline">#}
+{##}
+{##}
+{#                    <div class="column is-4 is-offset-4">#}
+{#                        <div class="select is-multiple">#}
+{#                              <select multiple size="8" id="roomSelect">#}
+{#                                  {% for room in rooms %}#}
+{#                                    <option>{{ room }}</option>#}
+{#                                  {% endfor %}#}
+{#                              </select>#}
+{#                        </div>#}
+{#                        <div class="field">#}
+{#                            <label>Room name</label>#}
+{##}
+{#                            <div class="control">#}
+{#                                <input class="input" type="text" placeholder="Room name" id="room-name-input">#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="field">#}
+{#                            <label>Username</label>#}
+{##}
+{#                            <div class="control">#}
+{#                                <input class="input" type="text" placeholder="Username" id="username-input">#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="field">#}
+{#                            <div class="control">#}
+{#                                <a class="button is-dark" id="roomConnect">Connect</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </section>#}
+{#        <script>#}
+            {#document.querySelector('#room-name-input').focus();#}
+            {##}
+            {#document.querySelector('#room-name-submit').onclick = function(e) {#}
+            {#    var roomName = document.querySelector('#room-name-input').value;#}
+            {#    var userName = document.querySelector('#username-input').value;#}
+            {##}
+            {#    window.location.replace(roomName + '/?username=' + userName);#}
+{##}
+{#            // redirect to '/room/<roomSelect>/'#}
+{#            document.querySelector("#roomSelect").onchange = function() {#}
+{#                let roomName = document.querySelector("#roomSelect").value.split(" (")[0];#}
+{#                window.location.pathname = "chat/" + roomName + "/";#}
+{#            }#}
+{#        </script>#}
+{#{% endblock %}#}
