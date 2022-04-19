@@ -127,22 +127,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+_STATIC_ROOT = Path(BASE_DIR, 'static')
+if DEBUG:
+    STATICFILES_DIRS = (_STATIC_ROOT,)
+else:
+    STATIC_ROOT = _STATIC_ROOT
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
 
 LOGOUT_REDIRECT_URL = '/chat/'
 LOGIN_REDIRECT_URL = '/chat/'

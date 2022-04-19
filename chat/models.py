@@ -5,21 +5,9 @@ from django.db import models
 class Room(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField()
-    status = models.ManyToManyField(User, blank=True)
-
-    def get_online_count(self):
-        return self.status.count()
-
-    def join(self, user):
-        self.status.add(user)
-        self.save()
-
-    def leave(self, user):
-        self.status.remove(user)
-        self.save()
 
     def __str__(self):
-        return f'{self.name} ({self.get_online_count()})'
+        return f'{self.name}'
 
 
 class Message(models.Model):
