@@ -1,17 +1,17 @@
 body {
-    background: #9c88ff;
+    background: #1e1e1e;
 }
 
 .navbar.is-purple {
-    background: #8c7ae6;
+    background: #1e1e1e;
 }
 
 .navbar .button {
-    border-color: #9c88ff;
-    background: #9c88ff;
+    border-color: #232323FF;
+    background: #232323FF;
     color: #fff;
 }
 .messages {
-    height: 500px;
+    height: 480px;
     overflow-y: auto;
 }
